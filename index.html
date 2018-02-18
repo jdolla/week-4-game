@@ -5,6 +5,9 @@
     <title>RPG Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!-- CSS & FONTS -->
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
     <link href="https://fonts.googleapis.com/css?family=Arbutus|Roboto" rel="stylesheet">
@@ -19,36 +22,36 @@
             </div>
             <div class="selection-section card-table">
 
-                <div id="voltron" class="card unselected-card">
-                    <div class="card-label">Voltron</div>
+                <div class="card unselected-card" data-name="voltron" data-hp="150" data-attack="20" data-counter="25">
+                    <div class="hero-name card-label">Voltron</div>
                     <div class="hero-frame">
                         <img class="hero-pic" src="./assets/images/voltron2.jpg">
                     </div>
-                    <div class="card-label">150</div>
+                    <div class="card-label hp">150</div>
                 </div>
 
-                <div id="red-lion" class="card unselected-card">
-                    <div class="card-label">Red Lion</div>
+                <div class="card unselected-card" data-name="red-lion" data-hp="90" data-attack="25" data-counter="28">
+                    <div class="hero-name card-label">Red Lion</div>
                     <div class="hero-frame">
                         <img class="hero-pic" src="./assets/images/red-lion.png">
                     </div>
-                    <div class="card-label">90</div>
+                    <div class="card-label hp">90</div>
                 </div>
 
-                <div id="zarkon" class="card unselected-card">
-                    <div class="card-label">Zarkon</div>
+                <div class="card unselected-card" data-name="zarkon" data-hp="130" data-attack="19" data-counter="26">
+                    <div class="hero-name card-label">Zarkon</div>
                     <div class="hero-frame">
                         <img class="hero-pic" src="./assets/images/zarkon.png">
                     </div>
-                    <div class="card-label">130</div>
+                    <div class="card-label hp">130</div>
                 </div>
 
-                <div id="haggar" class="card unselected-card">
+                <div class="hero-name card unselected-card" data-name="haggar" data-hp="75" data-attack="30" data-counter="31">
                     <div class="card-label">Witch Haggar</div>
                     <div class="hero-frame">
                         <img class="hero-pic" src="./assets/images/witch-haggar.jpg">
                     </div>
-                    <div class="card-label">75</div>
+                    <div class="card-label hp">75</div>
                 </div>
 
             </div>
