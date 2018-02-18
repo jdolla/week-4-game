@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>RPG Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,15 +8,69 @@
     <!-- CSS & FONTS -->
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
     <link href="https://fonts.googleapis.com/css?family=Arbutus|Roboto" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
 </head>
-<body>
-    <div class="bg game-container">
-        <div class="grid-item">
 
+<body>
+    <div class="bg">
+        <div class="game-container">
+            <div class="header-section">
+                <h1>Voltron Battles!</h1>
+            </div>
+            <div class="selection-section card-table">
+
+                <div id="voltron" class="card unselected-card">
+                    <div class="card-label">Voltron</div>
+                    <div class="hero-frame">
+                        <img class="hero-pic" src="./assets/images/voltron2.jpg">
+                    </div>
+                    <div class="card-label">150</div>
+                </div>
+
+                <div id="red-lion" class="card unselected-card">
+                    <div class="card-label">Red Lion</div>
+                    <div class="hero-frame">
+                        <img class="hero-pic" src="./assets/images/red-lion.png">
+                    </div>
+                    <div class="card-label">90</div>
+                </div>
+
+                <div id="zarkon" class="card unselected-card">
+                    <div class="card-label">Zarkon</div>
+                    <div class="hero-frame">
+                        <img class="hero-pic" src="./assets/images/zarkon.png">
+                    </div>
+                    <div class="card-label">130</div>
+                </div>
+
+                <div id="haggar" class="card unselected-card">
+                    <div class="card-label">Witch Haggar</div>
+                    <div class="hero-frame">
+                        <img class="hero-pic" src="./assets/images/witch-haggar.jpg">
+                    </div>
+                    <div class="card-label">75</div>
+                </div>
+
+            </div>
+            <div class="hero-section">
+                hero-section
+            </div>
+            <div class="enemy-section">
+                enemy-section
+            </div>
+            <div class="fight-section">
+                fight-section
+            </div>
+            <div class="defender-section">
+                defender-section
+            </div>
+            <div class="info-section">
+                info-section
+            </div>
         </div>
     </div>
     <!-- Script Files -->
     <script src="./assets/javascript/game.js"></script>
 </body>
+
 </html>
