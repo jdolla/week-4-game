@@ -1,6 +1,8 @@
 body, html {
     height: 100%;
     font-family: 'Roboto', sans-serif;
+    background-color: darkblue;
+    background-image: url("../images/background-tile.png");
 }
 
 .bg {
@@ -28,19 +30,40 @@ body, html {
     display: none;
 }
 
-.header-section {
+#header-section {
     width: 100%;
     text-align: right;
     padding: 0;
     margin: 0;
 }
 
-h1 {
+.logo {
     color: white;
     font-size: 32px;
     font-weight: bold;
     padding: 24px 30px;
+
+    text-shadow:
+        -1.5px -1.5px 0 red,
+        1.5px -1.5px 0 red,
+        -1.5px 1.5px 0 red,
+        1.5px 1.5px 0 red;
+
 }
+
+h1 {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 5px;
+    text-shadow:
+        -1px -1px 0 blueviolet,
+        1px -1px 0 blueviolet,
+        -1px 1px 0 blueviolet,
+        1px 1px 0 blueviolet;
+
+}
+
 
 .hero-frame {
     width: 120px;
