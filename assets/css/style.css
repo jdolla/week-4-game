@@ -41,7 +41,7 @@ body, html {
     color: white;
     font-size: 32px;
     font-weight: bold;
-    padding: 24px 30px;
+    padding: 24px 30px 0 30px;
 
     text-shadow:
         -1.5px -1.5px 0 red,
@@ -97,4 +97,38 @@ h1 {
 .unselected-card .card-label {
     padding:5px;
     font-weight: bold;
+}
+
+button {
+    border:1px solid white;
+    color: white;
+    padding: 5px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    background-color:blueviolet;
+    font-weight: bold;
+    margin: 5px 20px;
+    cursor: pointer;
+}
+
+button:active{
+    background-color: red;
+}
+
+#fight-section {
+    display: grid;
+    grid-template-columns: 150px auto;
+    align-items: center;
+}
+
+#battleReport {
+    color: white;
+    font-weight: bold;
+    text-shadow:
+    -.5px -.5px 0 blueviolet,
+    .5px -.5px 0 blueviolet,
+    -.5px .5px 0 blueviolet,
+    .5px .5px 0 blueviolet;
 }

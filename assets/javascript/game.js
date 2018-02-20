@@ -1,8 +1,12 @@
 
-var heroes = [];
-
 //https://learn.jquery.com/code-organization/concepts/
 //https://stackoverflow.com/questions/15505405/javascript-creating-new-instance-of-objects
+
+var stagingSection = $("#staging-section");
+var heroSection = $("#hero-section");
+var enemySection = $("#enemy-section");
+var defenderSection = $("#defender-section");
+
 var Champion = (function (hero) {
 
     var private = {
@@ -88,36 +92,86 @@ var Champion = (function (hero) {
     }
 });
 
+var game = {
+    playerCharacter: null,
+    enemies: [],
+    defender: null,
+    matchInProgress: false,
 
 
-$(document).ready(function () {
+    setup: function (pc, heroes) {
+        this.playerCharacter = null;
+        this.enemies = [];
+        this.defender = null;
 
-    $("#staging-section").on("click", ".card", function () {
-        heroes = $(this).parent().children().clone();
-        $(heroes).addClass("clone");
-
-    })
-
-    $("#hero-section").on("click", ".card", function () {
-        console.log($(this).parent().attr("id"));
-        console.log(this);
-    })
-
-    $("#enemy-section").on("click", ".card", function () {
-        console.log($(this).parent().attr("id"));
-        console.log(this);
-    })
-
-    $("#defender-section").on("click", ".card", function () {
-        console.log($(this).parent().attr("id"));
-        console.log(this);
-    })
-
-    function findCloneByName(name) {
+        var pcName = $(pc).attr("data-name");
         for (var i = 0; i < heroes.length; i++) {
-            if ($(heroes[i]).attr("data-name") === name) {
-                return heroes[i];
+            var heroName = $(heroes[i]).attr("data-name");
+            if (heroName === pcName) {
+                this.playerCharacter = new Champion(heroes[i]);
+            }
+            else {
+                this.enemies.push(heroes[i]);
+            }
+        }
+
+        $(heroSection).append(this.playerCharacter.card());
+        $.each(this.enemies, function(i, enemy){
+            $(enemySection).append(enemy);
+        });
+        $(stagingSection).hide();
+
+    },
+
+    reset: function(){
+        $(heroSection).empty();
+        $(enemySection).empty();
+        $(stagingSection).show();
+    },
+
+    setDefender: function(card){
+        if(!this.matchInProgress){
+            
+            if(this.defender != null){
+                this.removeDefender(this.defender.card);
+            }
+            
+            this.defender = new Champion(card);
+            $(defenderSection).append(card);  
+        }
+    },
+
+    removeDefender: function(card){
+        if(this.defender != null && !this.matchInProgress){
+            $(enemySection).append(this.defender.card());
+        }
+    },
+
+    destroyDefender: function(card){
+        var enemyName = $(card).attr("data-name");
+        for(var i = 0; i < this.enemies.length; i++){
+            if(enemyName === $(this.enemies[i]).attr("data-name")){
+                card.remove();
+                this.enemies.splice(i, 1);
+                this.defender = null;
             }
         }
     }
+}
+
+$(document).ready(function() {
+
+    $(stagingSection).on("click", ".card", function () {
+        heroes = $(stagingSection).children().clone();
+        game.setup(this, heroes);
+    })
+
+    $("#enemy-section").on("click", ".card", function () {
+        game.setDefender(this);
+    })
+
+    $("#defender-section").on("click", ".card", function () {
+        game.removeDefender(this);
+    })
+
 })
