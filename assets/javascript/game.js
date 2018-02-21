@@ -59,27 +59,26 @@ var Champion = (function (hero) {
             //https://css-tricks.com/template-literals/  --<<-- way cool!
             var currentPower = private.attackPower;
             var counterDamage = opponent.takeDamage(currentPower);
-
+            private.attackPower += private.baseAttack;
             if (counterDamage <= 0) {
                 return {
                     round: "won",
-                    battleReport: `You defeated ${opponent.name()}!`
+                    battleReport: `You defeated <span class="defender-name">${opponent.name()}!</span>`
                 }
             }
             else {
-                private.attackPower += private.baseAttack;
                 setHp(getHp() - counterDamage);
                 if (getHp() <= 0) {
                     return {
                         round: "lost",
-                        battleReport: `You were defeated by ${opponent.name()}!`
+                        battleReport: `You were defeated by <span class="defender-name">${opponent.name()}</span>!`
                     }
                 }
                 else {
                     return {
                         round: "draw",
-                        battleReport: `You attacked ${opponent.name()} for ${currentPower} damage.` +
-                            `<br>${opponent.name()} attacked you for ${counterDamage} damage.`
+                        battleReport: `You attacked <span class="defender-name">${opponent.name()}</span> for ${currentPower} damage.` +
+                            `<br><span class="defender-name">${opponent.name()}</span> attacked you for ${counterDamage} damage.`
                     }
 
                 }
@@ -97,6 +96,8 @@ var game = {
     enemies: [],
     defender: null,
     matchInProgress: false,
+    gameOver: false,
+    report: $("#battleReport"),
 
 
     setup: function (pc, heroes) {
@@ -126,7 +127,13 @@ var game = {
     reset: function(){
         $(heroSection).empty();
         $(enemySection).empty();
+        $(defenderSection).empty();
         $(stagingSection).show();
+        $(this.report).empty();
+        this.defender = null;
+        this.enemies = [];
+        this.gameOver = false;
+        this.matchInProgress = false;
     },
 
     setDefender: function(card){
@@ -156,6 +163,40 @@ var game = {
                 this.defender = null;
             }
         }
+    },
+
+    fight: function(){
+        if(!this.gameOver){
+            if(this.defender === null){
+                $(this.report).html("No Enemies to Fight.");
+            }
+            else{
+                var battleReport = this.playerCharacter.attack(this.defender);
+                $(this.report).html(battleReport.battleReport);
+                switch(battleReport.round){
+                    case "won":
+                        this.destroyDefender(this.defender.card());
+                        if (this.enemies.length === 0){
+                            this.gameOver = true;
+                        }
+                        else {
+                            this.matchInProgress = false;
+                        }
+                        break;
+                    case "lost":
+                        this.gameOver = true;
+                        this.matchInProgress = true;
+                        break;
+                    case "draw":
+                        this.matchInProgress = true;
+                        break;
+                }
+            }
+            if(this.gameOver){
+                $("#attack").hide();
+                $("#reset").show();
+            }
+        }
     }
 }
 
@@ -172,6 +213,16 @@ $(document).ready(function() {
 
     $("#defender-section").on("click", ".card", function () {
         game.removeDefender(this);
+    })
+
+    $("#attack").on("click", function(){
+        game.fight();
+    });
+
+    $("#reset").on("click", function(){
+        game.reset();
+        $("#attack").show();
+        $("#reset").hide();
     })
 
 })
